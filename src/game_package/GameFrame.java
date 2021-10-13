@@ -10,7 +10,7 @@ public class GameFrame extends JFrame{
 		
 		
 		this.add(new GamePanel());
-		this.setTitle("Puissance 4 by Mathis - M1 IC - 2021");
+		this.setTitle("Puissance 4 by Mathis & Nicolas - M1 IC - 2021");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(false);
 		this.pack();
