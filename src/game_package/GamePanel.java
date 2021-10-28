@@ -21,6 +21,7 @@ public class GamePanel extends JPanel implements ActionListener{
 	Terrain terrain1;
 	//AI1 Tron1;
 	AI2 Tron2;
+	AI3 Tron3;
 	Graphics g;
 	JButton[] buttons;
 	
@@ -29,10 +30,10 @@ public class GamePanel extends JPanel implements ActionListener{
 		random = new Random();
 		terrain1 = new Terrain(DIM_X, DIM_Y,UNIT_SIZE,SCREEN_HEIGHT,SCREEN_WIDTH);
 		
-		//permet de positionner où on veut
+		//permet de positionner oï¿½ on veut
 		this.setLayout(null);
 		
-		//créer les boutons
+		//crï¿½er les boutons
 		this.buttons = new JButton[DIM_Y];
 		
 		//ajoute les boutons
@@ -58,7 +59,7 @@ public class GamePanel extends JPanel implements ActionListener{
 			buttons[i].setBackground(Color.gray);
 			buttons[i].setBorder(BorderFactory.createEtchedBorder());
 			
-			//Pour désactiver un bouton :
+			//Pour dï¿½sactiver un bouton :
 			//button4.setEnabled(false);
 			
 			terrain1.setButton(buttons[i], i);
@@ -83,6 +84,7 @@ public class GamePanel extends JPanel implements ActionListener{
 		if(terrain1.isAi) {
 			//this.Tron1 = new AI1(terrain1);
 			this.Tron2 = new AI2(terrain1,DIM_X,DIM_Y);
+			this.Tron3 = new AI3(terrain1,DIM_X,DIM_Y);
 		}
 		
 		running = true;
@@ -105,7 +107,7 @@ public class GamePanel extends JPanel implements ActionListener{
 			//l'IA joue
 			if(terrain1.isAi && !terrain1.color && terrain1.winner==0) {
 				System.out.println("\n C'est au tour de l'IA !");
-				Tron2.play(terrain1);
+				Tron3.play(terrain1);
 				/* AI against AI
 				while(terrain1.winner==0) {
 					Tron1.play();
@@ -127,7 +129,7 @@ public class GamePanel extends JPanel implements ActionListener{
 
 	public void ecrit() {
 		
-		//écrit le vaincoeur 
+		//ï¿½crit le vaincoeur 
 		if(terrain1.winner==1) {
 			g.setColor(Color.orange);
 			g.setFont(new Font("Ink Free",Font.BOLD,UNIT_SIZE/2));
