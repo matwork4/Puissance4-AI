@@ -11,7 +11,7 @@ public class AI3 {
 	//la case 0 correspond au score (lu par minmax), et la case 1 correspond au choix (entre 0 et 7)
 	int[] scoreChoix;
 
-	int hauteur,largeur;
+	int hauteur,largeur, profondeur;
 	int choix = 0;
 	AI_tools tools;
 	
@@ -38,7 +38,7 @@ public class AI3 {
 	public void play(Terrain terrain1) {
 		terrain=tools.copyTerrain(terrain1.terrain);
 		int nbPlays=0;
-		int profondeur = 10;
+		profondeur = 10;
 		int alpha = -2^10;
 		int beta = 2^10;
 		
