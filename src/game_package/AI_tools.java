@@ -16,7 +16,7 @@ public class AI_tools {
 	
 	
 	/* ======================================
-	 * Fonctions utilisées par l'IA numéro 2
+	 * Fonctions utilisées par les IAs
 	 * ============== VVVVVV ================
 	 */
 	

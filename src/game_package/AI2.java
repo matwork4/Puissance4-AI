@@ -12,12 +12,15 @@ public class AI2 {
 	int hauteur,largeur;
 	int choix = 0;
 	AI_tools tools;
+	int depth = 0;
 	
 	
 	/* Constructeur de la classe AI2
 	 * Permet d'initialiser l'IA numéro 2
 	 */
-	public AI2(Terrain T,int DIM_X, int DIM_Y) {
+	public AI2(Terrain T,int DIM_X, int DIM_Y,int depth) {
+		
+		this.depth = depth;
 		
 		//On initialise les outils de l'IA
 		this.tools = new AI_tools(DIM_X,DIM_Y);
@@ -36,7 +39,7 @@ public class AI2 {
 	public void play(Terrain terrain1) {
 		terrain=tools.copyTerrain(terrain1.terrain);
 		int nbPlays=0;
-		int profondeur = 6;
+		int profondeur = depth;
 		
 		int osef = minMax(terrain, nbPlays, profondeur);
 		
