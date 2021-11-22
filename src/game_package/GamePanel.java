@@ -26,10 +26,12 @@ public class GamePanel extends JPanel implements ActionListener{
 	Graphics g;
 	JButton[] buttons;
 	JButton buttonJvJ;
+	int depth = 0;
 	
 	
-	GamePanel(int typePartie){
+	GamePanel(int typePartie, int depth){
 		typepartie = typePartie;
+		this.depth = depth;
 		random = new Random();
 
 		if(typePartie == 1)
@@ -94,8 +96,8 @@ public class GamePanel extends JPanel implements ActionListener{
 		
 		if(terrain1.isAi) {
 			//this.Tron1 = new AI1(terrain1);
-			this.Tron2 = new AI2(terrain1,DIM_X,DIM_Y);
-			this.Tron3 = new AI3(terrain1,DIM_X,DIM_Y);
+			this.Tron2 = new AI2(terrain1,DIM_X,DIM_Y,depth);
+			this.Tron3 = new AI3(terrain1,DIM_X,DIM_Y,depth);
 		}
 		
 		running = true;
@@ -130,9 +132,8 @@ public class GamePanel extends JPanel implements ActionListener{
 				{
 					while(terrain1.winner==0) {
 
-						Tron2.play(terrain1);
 						Tron3.play(terrain1);
-
+						
 					}
 				}
 			}

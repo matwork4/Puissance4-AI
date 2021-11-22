@@ -25,7 +25,7 @@ public class GameFrame extends JFrame {
 		
 	}
 
-	public void startGame(int typePartie)
+	public void startGame(int typePartie, int depth)
 	{
 		/* Deux options */
 
@@ -33,7 +33,7 @@ public class GameFrame extends JFrame {
 		this.getContentPane().invalidate();*/
 
 		this.menu.setVisible(false);
-		this.getContentPane().add(new GamePanel(typePartie));
+		this.getContentPane().add(new GamePanel(typePartie, depth));
 		this.getContentPane().revalidate();
 	}
 
