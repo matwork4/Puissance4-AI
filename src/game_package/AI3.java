@@ -11,7 +11,7 @@ public class AI3 {
 	//la case 0 correspond au score (lu par minmax), et la case 1 correspond au choix (entre 0 et 7)
 	int[] scoreChoix;
 
-	int hauteur,largeur;
+	int hauteur,largeur, profondeur;
 	int choix = 0;
 	AI_tools tools;
 	
@@ -19,7 +19,8 @@ public class AI3 {
 	/* Constructeur de la classe AI2
 	 * Permet d'initialiser l'IA num�ro 2
 	 */
-	public AI3(Terrain T,int DIM_X, int DIM_Y) {
+	public AI3(Terrain T,int DIM_X, int DIM_Y,int depth) {
+		this.profondeur = depth;
 		
 		//On initialise les outils de l'IA
 		this.tools = new AI_tools(DIM_X,DIM_Y);
@@ -38,7 +39,6 @@ public class AI3 {
 	public void play(Terrain terrain1) {
 		terrain=tools.copyTerrain(terrain1.terrain);
 		int nbPlays=0;
-		int profondeur = 10;
 		int alpha = -2^10;
 		int beta = 2^10;
 		

@@ -17,6 +17,7 @@ public class GamePanel extends JPanel implements ActionListener{
 	static final int DIM_Y = 7, DIM_X = DIM_Y-1;
 	
 	boolean running = false;
+	int typepartie;
 	Random random;
 	Terrain terrain1;
 	//AI1 Tron1;
@@ -24,11 +25,23 @@ public class GamePanel extends JPanel implements ActionListener{
 	AI3 Tron3;
 	Graphics g;
 	JButton[] buttons;
+	JButton buttonJvJ;
+	int depth = 0;
 	
 	
-	GamePanel(){
+	GamePanel(int typePartie, int depth){
+		typepartie = typePartie;
+		this.depth = depth;
 		random = new Random();
-		terrain1 = new Terrain(DIM_X, DIM_Y,UNIT_SIZE,SCREEN_HEIGHT,SCREEN_WIDTH);
+
+		if(typePartie == 1)
+		{
+			terrain1 = new Terrain(DIM_X, DIM_Y,UNIT_SIZE,SCREEN_HEIGHT,SCREEN_WIDTH, false);
+		}
+		else
+		{
+			terrain1 = new Terrain(DIM_X, DIM_Y,UNIT_SIZE,SCREEN_HEIGHT,SCREEN_WIDTH, true);
+		}
 		
 		//permet de positionner o� on veut
 		this.setLayout(null);
@@ -45,8 +58,8 @@ public class GamePanel extends JPanel implements ActionListener{
 		
 		startGame();
 	}
-	
-	
+
+
 	public void setButtons() {
 		
 		for(int i=0;i<DIM_Y;i++) {
@@ -83,8 +96,8 @@ public class GamePanel extends JPanel implements ActionListener{
 		
 		if(terrain1.isAi) {
 			//this.Tron1 = new AI1(terrain1);
-			this.Tron2 = new AI2(terrain1,DIM_X,DIM_Y);
-			this.Tron3 = new AI3(terrain1,DIM_X,DIM_Y);
+			this.Tron2 = new AI2(terrain1,DIM_X,DIM_Y,depth);
+			this.Tron3 = new AI3(terrain1,DIM_X,DIM_Y,depth);
 		}
 		
 		running = true;
@@ -93,27 +106,36 @@ public class GamePanel extends JPanel implements ActionListener{
 	
 	public void paintComponent(Graphics g) {
 		System.out.println("execute 1 fois");
+
 		super.paintComponent(g);
+
 		draw(g);
 	}
 	
-	
+
 	public void draw(Graphics g) {
-		
-		
+
+		this.g=g;
+
 		if(running) {
-			this.g=g;
-			
+
+
 			//l'IA joue
 			if(terrain1.isAi && !terrain1.color && terrain1.winner==0) {
-				System.out.println("\n C'est au tour de l'IA !");
-				Tron3.play(terrain1);
-				/* AI against AI
-				while(terrain1.winner==0) {
-					Tron1.play();
-					Tron2.play(terrain1);
-					
-				}*/
+
+				/* Player against IA : type de Partie 2 */
+				if(typepartie == 2) {
+					System.out.println("\n C'est au tour de l'IA !");
+					Tron3.play(terrain1);
+				}
+				else if(typepartie == 3) // IA against IA : type de Partie 3 */
+				{
+					while(terrain1.winner==0) {
+
+						Tron3.play(terrain1);
+						
+					}
+				}
 			}
 			
 			//affiche la grille
@@ -178,11 +200,11 @@ public class GamePanel extends JPanel implements ActionListener{
 	
 	
 	
-	
+
+
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-	
 
 		for(int i=0;i<DIM_Y;i++) {
 			if(e.getSource()==buttons[i]) {

@@ -12,7 +12,7 @@ public class Terrain {
 	int decal_left = 0, decal_top = 0;
 	int unit_size = 0, screen_height = 0, screen_width = 0;
 	boolean color = true; 
-	boolean isAi = true;
+	boolean isAi;
 	int winner = 0;
 	int nbPlays = 0;
 	
@@ -26,7 +26,17 @@ public class Terrain {
 		}
 	}
 	
-	public Terrain(int dimX, int dimY,int unit_size,int screen_height,int screen_width) {
+	public Terrain(int dimX, int dimY,int unit_size,int screen_height,int screen_width, boolean isai) {
+
+		if(isai == false)
+		{
+			isAi = false;
+		}
+		else
+		{
+			isAi = true;
+		}
+
 		this.unit_size=unit_size;
 		this.screen_height=screen_height;
 		this.screen_width=screen_width;
