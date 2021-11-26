@@ -34,7 +34,7 @@ public class AI3 {
 	
 	
 	/* Fonction Play :
-	 * Permet � l'IA de jouer son tour
+	 * Permet a l'IA de jouer son tour
 	 */
 	public void play(Terrain terrain1) {
 		terrain=tools.copyTerrain(terrain1.terrain);
@@ -43,27 +43,17 @@ public class AI3 {
 		int beta = 2^10;
 		
 		scoreChoix = minMax(terrain, nbPlays, profondeur, alpha, beta);
-		
-		// triche : si il veut jouer dans une colonne comlpète, on joue ailleurs
-		if(!tools.colonneIsNotFull(scoreChoix[1],terrain)){
-			for(int i=0;i<largeur;i++) {
-				if(tools.colonneIsNotFull(i,terrain)){
-					scoreChoix[1]=i;
-					i=largeur;
-				}
-			}
-		}
-		
-		
-		
-		//permet de jouer un jeton � l'indice 0
+
+		scoreChoix = tools.changeCoup(terrain,largeur,scoreChoix);
+
+		//permet de jouer un jeton a l'indice 0
 		terrain1.ajoutPiece(scoreChoix[1],g);
 		terrain1.color=!terrain1.color;
 		
 	}
 	
 	
-	/* Algorithme minMax :
+	/* Algorithme minMax avec coupe alpha beta :
 	 * 
 	 */
 	int[] minMax(int[][] tab, int nbPlays, int profondeur, int alpha, int beta) {
@@ -112,14 +102,13 @@ public class AI3 {
 					scoreChoix[0]=-scoreChoix[0];
 					
 					if(scoreChoix[0]>=beta) {
-						//choix = i;
-						System.out.println("Score = "+scoreChoix[0] + " i = "+scoreChoix[1]);
+						//System.out.println("Score = "+scoreChoix[0] + " i = "+scoreChoix[1]);
 						return scoreChoix;
 					}
 					if(scoreChoix[0]>alpha) {
 						choix = i;
 						alpha=scoreChoix[0];
-						System.out.println("Score = "+scoreChoix[0] + " i = "+scoreChoix[1]);
+						//System.out.println("Score = "+scoreChoix[0] + " i = "+scoreChoix[1]);
 					}
 					
 					

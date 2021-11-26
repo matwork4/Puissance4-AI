@@ -13,6 +13,8 @@ public class AI2 {
 	int choix = 0;
 	AI_tools tools;
 	int depth = 0;
+
+	int[] scoreChoix;
 	
 	
 	/* Constructeur de la classe AI2
@@ -41,10 +43,14 @@ public class AI2 {
 		int nbPlays=0;
 		int profondeur = depth;
 		
-		int osef = minMax(terrain, nbPlays, profondeur);
+		//int osef = minMax(terrain, nbPlays, profondeur);
+
+		scoreChoix = minMax(terrain, nbPlays, profondeur);
+
+		scoreChoix = tools.changeCoup(terrain,largeur,scoreChoix);
 		
 		//permet de jouer un jeton à l'indice 0
-		terrain1.ajoutPiece(choix,g);
+		terrain1.ajoutPiece(scoreChoix[1],g);
 		terrain1.color=!terrain1.color;
 		
 	}
@@ -53,10 +59,15 @@ public class AI2 {
 	/* Algorithme minMax :
 	 * 
 	 */
-	int minMax(int[][] tab, int nbPlays, int profondeur) {
+	int[] minMax(int[][] tab, int nbPlays, int profondeur) {
+
+		int[] scoreChoix = new int[2];
+
 		//Test si le terrain est remplit 
 		if(nbPlays==hauteur*largeur) {
-			return 0;
+			scoreChoix[0]=0;
+			scoreChoix[1]=0;
+			return scoreChoix;
 		}
 		
 		//true si c'est le tour de l'IA, false sinon
@@ -66,7 +77,9 @@ public class AI2 {
 			if(tools.colonneIsNotFull(i,tab)){
 				if(tools.estVictorieux(i,tab,AIturn)) {
 					int value = (hauteur*largeur+1 - nbPlays)/2;
-					return value;
+					scoreChoix[0]=value;
+					scoreChoix[1]=i;
+					return scoreChoix;
 				}
 			}
 		}
@@ -80,23 +93,25 @@ public class AI2 {
 				
 					int[][] newTab;
 					newTab=tools.addJeton(i,tab,AIturn);
-					int score = -minMax(newTab, nbPlays-1, profondeur-1);
-					//Il manque ça : 
+					scoreChoix = minMax(newTab, nbPlays-1, profondeur-1);
+					scoreChoix[0]=-scoreChoix[0];
+
+					//Il manque ça :
 					if(i==0) {
-						bestScore = score;
+						bestScore = scoreChoix[0];
 						//choix = 0;
 					}
-					if(score > bestScore) {
-						bestScore = score;
+					if(scoreChoix[0] > bestScore) {
+						bestScore = scoreChoix[0];
 						choix = i;
 						//afficheTable(tab);
-						System.out.println("Score = "+score + " i = "+i);
+						//System.out.println("Score = "+scoreChoix[0] + " i = "+i);
 					}
 				}
 			}
 		}
-		
-		return bestScore;
+		scoreChoix[0] = bestScore;
+		return scoreChoix;
 	}
 	
 	

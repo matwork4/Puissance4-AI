@@ -15,7 +15,9 @@ public class GamePanel extends JPanel implements ActionListener{
 	static final int GAME_UNITS = (SCREEN_WIDTH*SCREEN_HEIGHT)/UNIT_SIZE;
 	static final int DELAY = 100;
 	static final int DIM_Y = 7, DIM_X = DIM_Y-1;
-	
+	// Fonctions pour le chronometre
+	static long chrono = 0 ;
+
 	boolean running = false;
 	int typepartie;
 	Random random;
@@ -126,7 +128,10 @@ public class GamePanel extends JPanel implements ActionListener{
 				/* Player against IA : type de Partie 2 */
 				if(typepartie == 2) {
 					System.out.println("\n C'est au tour de l'IA !");
+
+					Go_Chrono();
 					Tron3.play(terrain1);
+					Stop_Chrono();
 				}
 				else if(typepartie == 3) // IA against IA : type de Partie 3 */
 				{
@@ -221,6 +226,21 @@ public class GamePanel extends JPanel implements ActionListener{
 		repaint();
 		
 	}
+
+
+	// Lancement du chrono
+	static void Go_Chrono() {
+		chrono = java.lang.System.currentTimeMillis() ;
+	}
+
+	// Arret du chrono
+	static void Stop_Chrono() {
+		long chrono2 = java.lang.System.currentTimeMillis() ;
+		long temps = chrono2 - chrono ;
+		System.out.println("Temps ecoule = " + temps + " ms") ;
+	}
+
+
 	
 
 }
