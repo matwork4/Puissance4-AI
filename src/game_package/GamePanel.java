@@ -130,7 +130,7 @@ public class GamePanel extends JPanel implements ActionListener{
 					System.out.println("\n C'est au tour de l'IA !");
 
 					Go_Chrono();
-					Tron2.play(terrain1);
+					Tron3.play(terrain1);
 					Stop_Chrono();
 				}
 				else if(typepartie == 3) // IA against IA : type de Partie 3 */
