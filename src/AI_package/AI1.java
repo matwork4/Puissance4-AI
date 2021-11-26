@@ -1,9 +1,11 @@
-package game_package;
+package AI_package;
 
 import java.awt.Graphics;
 import java.util.*;
 
-public class AI2 {
+import game_package.Terrain;
+
+public class AI1 {
 	
 	Terrain T;
 	Graphics g;
@@ -20,7 +22,7 @@ public class AI2 {
 	/* Constructeur de la classe AI2
 	 * Permet d'initialiser l'IA numéro 2
 	 */
-	public AI2(Terrain T,int DIM_X, int DIM_Y,int depth) {
+	public AI1(Terrain T,int DIM_X, int DIM_Y,int depth) {
 		
 		this.depth = depth;
 		

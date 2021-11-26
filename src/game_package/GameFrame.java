@@ -10,7 +10,6 @@ public class GameFrame extends JFrame {
 	MenuPanel menu;
 	GameFrame(){
 
-
 		menu = new MenuPanel(this);
 		this.add(menu);
 		//this.add(new GamePanel());
@@ -21,11 +20,9 @@ public class GameFrame extends JFrame {
 		this.setVisible(true);
 		this.setLocationRelativeTo(null);
 		
-		
-		
 	}
 
-	public void startGame(int typePartie, int depth)
+	public void startGame(int typePartie, int depth, boolean isAlphabeta)
 	{
 		/* Deux options */
 
@@ -33,7 +30,7 @@ public class GameFrame extends JFrame {
 		this.getContentPane().invalidate();*/
 
 		this.menu.setVisible(false);
-		this.getContentPane().add(new GamePanel(typePartie, depth));
+		this.getContentPane().add(new GamePanel(typePartie, depth, isAlphabeta));
 		this.getContentPane().revalidate();
 	}
 

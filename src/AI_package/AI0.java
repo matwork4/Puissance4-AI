@@ -1,16 +1,18 @@
-package game_package;
+package AI_package;
 
 import java.awt.Graphics;
 import java.util.*;
 
-public class AI1 {
+import game_package.Terrain;
+
+public class AI0 {
 	
 	Terrain T;
 	Graphics g;
 	int[][] tab;
 	int choix=0;
 	
-	public AI1(Terrain T) {
+	public AI0(Terrain T) {
 		this.T=T;
 		//this.tab=T.terrain;
 		

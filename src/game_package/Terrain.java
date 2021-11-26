@@ -8,10 +8,10 @@ import javax.swing.JButton;
 
 public class Terrain {
 	
-	int[][] terrain;
+	public int[][] terrain;
 	int decal_left = 0, decal_top = 0;
 	int unit_size = 0, screen_height = 0, screen_width = 0;
-	boolean color = true; 
+	public boolean color = true; 
 	boolean isAi;
 	int winner = 0;
 	int nbPlays = 0;

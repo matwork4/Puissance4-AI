@@ -13,15 +13,18 @@ public class MenuPanel extends JPanel implements ActionListener {
     JButton buttonJvIA;
     JButton buttonIAvIA;
     GameFrame gameframe;
-    int typePartie = 0;
+    int typePartie = 1;
     int depthPartie = 0;
     int nbDepthButtons = 15;
     int decalDepth = 5;
     JRadioButton[] depths;
     JButton jouer;
+    JComboBox boxAIs, boxDepth;
+    boolean isAlphabeta = false;
+    int maxDepth = 20;
+    
 
-    MenuPanel(GameFrame gaameframe)
-    {
+    MenuPanel(GameFrame gaameframe){
         gameframe = gaameframe;
         this.setPreferredSize(new Dimension(SCREEN_WIDTH,SCREEN_HEIGHT));
         this.setBackground(Color.black);
@@ -34,38 +37,123 @@ public class MenuPanel extends JPanel implements ActionListener {
         this.add(buttonJvIA);
         this.add(buttonIAvIA);
         
-
     }
+    
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == buttonJvJ){
-            gameframe.startGame(typePartie,depthPartie);
+            gameframe.startGame(typePartie,depthPartie,isAlphabeta);
             
         }else if (e.getSource() == buttonJvIA){
         	typePartie = 2;
-        	createDepth(nbDepthButtons);
+        	
+        	createBoxAIs();
+        	createBoxDepths(maxDepth);
         	
         }else if(e.getSource() == buttonIAvIA){
         	typePartie = 3;
-        	createDepth(nbDepthButtons);
+        	createBoxAIs();
+        	createBoxDepths(maxDepth);
         	
-        }else {
+        }else if(e.getSource() == boxAIs) {
+        	
+        	if(boxAIs.getSelectedIndex()==1) {
+        		System.out.println("IA choisit : coupe Alphabeta");
+        		isAlphabeta = true;
+        	}else{
+        		System.out.println("IA choisit : Minimax");
+        		isAlphabeta = false;
+        	}
+        	
+        }else if(e.getSource() == boxDepth) {
+        	
+        	for(int i = 0; i<=maxDepth;i++) {
+        		if(boxDepth.getSelectedIndex()==i) {
+            		System.out.println("depth selected = "+i);
+            		depthPartie = i;
+            		
+            		/*On change le premier boutton en boutton "play"*/
+        			buttonJvJ.setText("Play");
+        			buttonJvJ.setEnabled(true);
+        			this.add(buttonJvJ);
+            	}
+        	}
+        	
+        /* Ceci permettait de générer des boutons correspondant a la profondeur :
+    	}else {
         	for(int i=0;i<nbDepthButtons;i++) {
         		if(e.getSource()==depths[i]) {
         			depthPartie = i+decalDepth;
         			
-        			/*On change le premier bouton en bouton "play"*/
         			buttonJvJ.setText("Play");
         			buttonJvJ.setEnabled(true);
         			this.add(buttonJvJ);
         			
         		}
-        	}
+        	}*/
         }
-        
     }
     
     
+    /* createBoxAIs :
+     * permet de créer le boutton qui sélectionne l'ia Minimax ou Minimax + coupe alpha beta
+     */
+    private void createBoxAIs() {
+    	
+    	/* On grise les boutons */
+    	buttonJvJ.setEnabled(false);
+    	buttonJvIA.setEnabled(false);
+    	buttonIAvIA.setEnabled(false);
+    	
+    	String[] AIs = {"MiniMax","MiniMax + AlphaBeta"};
+    	
+    	boxAIs = new JComboBox(AIs);
+
+    	this.add(boxAIs);
+    	boxAIs.setFocusable(false);
+    	boxAIs.setFont(new Font("Comic Sans",Font.BOLD,21));
+    	boxAIs.setForeground(Color.white);
+    	boxAIs.setBackground(Color.gray);
+    	boxAIs.setBorder(BorderFactory.createEtchedBorder());
+    	boxAIs.addActionListener(this);
+    	
+    	boxAIs.setSelectedIndex(1);
+    	
+    	boxAIs.setBounds(SCREEN_WIDTH/3,4*SCREEN_HEIGHT/7,SCREEN_WIDTH/3,40);
+    }
+    
+    /* createBoxDepths :
+     * permet de créer le boutton qui sélectionne la profondeur de Minimax 
+     */
+    private void createBoxDepths(int maxDepth) {
+    	
+    	String[] depths = {"Depth 0"};
+    	
+    	boxDepth = new JComboBox(depths);
+    	
+    	for(int i = 1; i<=maxDepth;i++) {
+    		boxDepth.insertItemAt("Depth "+i, i);
+    	}
+
+    	this.add(boxDepth);
+    	boxDepth.setFocusable(false);
+    	boxDepth.setFont(new Font("Comic Sans",Font.BOLD,23));
+    	boxDepth.setForeground(Color.white);
+    	boxDepth.setBackground(Color.gray);
+    	boxDepth.setBorder(BorderFactory.createEtchedBorder());
+    	boxDepth.addActionListener(this);
+    	
+    	boxDepth.setSelectedIndex(12);
+    	
+    	boxDepth.setBounds(SCREEN_WIDTH/3,4*SCREEN_HEIGHT/7+100,SCREEN_WIDTH/3,40);
+    }
+    
+    
+    /* createDepth :
+     * cette fonction permet de generer des boutons correpondants a la profondeur
+     * des algorithmes des IAs. (On ne l'utilise plus)
+    */
     private void createDepth(int number) {
     	
     	/* Grise les boutons */
@@ -80,10 +168,8 @@ public class MenuPanel extends JPanel implements ActionListener {
     	
     	for(int i=0;i<number;i++) {
     		
-    		
     		depths[i]=new JRadioButton();
     		group.add(depths[i]);
-    		
     		
     		if(i+decalDepth==9 && typePartie==3){
     			depths[i].setText("9 (advised)");
@@ -92,8 +178,6 @@ public class MenuPanel extends JPanel implements ActionListener {
     		}else {
     			depths[i].setText("Depth : "+(i+decalDepth));
     		}
-    		
-    		
     		
     		this.add(depths[i]);
     		
@@ -111,25 +195,11 @@ public class MenuPanel extends JPanel implements ActionListener {
     		}else {
     			depths[i].setBounds(SCREEN_WIDTH-(SCREEN_WIDTH/3),4*SCREEN_HEIGHT/8+(i-10)*60,SCREEN_WIDTH/5,30);
     		}
-    		
-    		
     	}
-    	
     }
     
-
     private JButton createButton(String s, int position) {
         JButton but = new JButton(s);
-        
-		/*
-        but.setFont(new Font("Segoe UI Black", Font.BOLD, 18));
-        but.addActionListener(this);
-        but.setAlignmentX(Component.CENTER_ALIGNMENT);
-        but.setForeground(new Color(255, 222, 06));
-        but.setBackground(Color.BLACK);
-        but.setBorder(BorderFactory.createBevelBorder(0, new Color(255, 222, 06), new Color(255, 222, 06)));
-        //but.setBounds(137, 35+(i*70), 275, 110);
-        but.setFocusable(false);*/
         
         but.setFocusable(false);
         but.setFont(new Font("Comic Sans",Font.BOLD,25));

@@ -1,4 +1,4 @@
-package game_package;
+package AI_package;
 
 public class AI_tools {
 
