@@ -43,19 +43,10 @@ public class AI3 {
 		int beta = 2^10;
 		
 		scoreChoix = minMax(terrain, nbPlays, profondeur, alpha, beta);
-		
-		// triche : si il veut jouer dans une colonne comlpète, on joue ailleurs
-		if(!tools.colonneIsNotFull(scoreChoix[1],terrain)){
-			for(int i=0;i<largeur;i++) {
-				if(tools.colonneIsNotFull(i,terrain)){
-					scoreChoix[1]=i;
-					i=largeur;
-				}
-			}
-		}
-		
-		
-		
+
+		scoreChoix = tools.changeCoup(terrain,largeur,scoreChoix);
+
+
 		//permet de jouer un jeton � l'indice 0
 		terrain1.ajoutPiece(scoreChoix[1],g);
 		terrain1.color=!terrain1.color;

@@ -119,7 +119,7 @@ public class Terrain {
 		int size = (int)Math.round(unit_size/1.2);
 		
 		g.fillOval(X,Y,size,size);
-		System.out.println("On dessine (normalement)");
+		//System.out.println("On dessine (normalement)");
 		
 	}
 	

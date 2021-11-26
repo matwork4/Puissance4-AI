@@ -179,7 +179,26 @@ public class AI_tools {
 			}
 		}
 	}
-	
+
+	/* int[] changeCoup
+	* Si il veut jouer dans une colonne comlpète, on joue ailleurs
+	 */
+	public int[] changeCoup(int[][] terrain, int largeur, int[] scoreChoix){
+
+		if(!colonneIsNotFull(scoreChoix[1],terrain)){
+			for(int i=0;i<largeur;i++) {
+				if(colonneIsNotFull(i,terrain)){
+					scoreChoix[1]=i;
+					i=largeur;
+				}
+			}
+		}
+
+		return scoreChoix;
+	}
+
+
+
 	
 	/* ======================================
 	 * Fonctions utilisées par l'IA numéro 3
