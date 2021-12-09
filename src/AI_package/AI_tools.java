@@ -197,15 +197,6 @@ public class AI_tools {
 		return scoreChoix;
 	}
 
-
-
-	
-	/* ======================================
-	 * Fonctions utilisées par l'IA numéro 3
-	 * ============== VVVVVV ================
-	 */
-	//(pas encore de fonctions)
-	//AI3 implémentera minMax avec la coupe Alpha / Beta
 	
 	
 }

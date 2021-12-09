@@ -98,10 +98,8 @@ public class AI1 {
 					scoreChoix = minMax(newTab, nbPlays-1, profondeur-1);
 					scoreChoix[0]=-scoreChoix[0];
 
-					//Il manque ça :
 					if(i==0) {
 						bestScore = scoreChoix[0];
-						//choix = 0;
 					}
 					if(scoreChoix[0] > bestScore) {
 						bestScore = scoreChoix[0];
