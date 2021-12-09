@@ -45,8 +45,6 @@ public class AI1 {
 		int nbPlays=0;
 		int profondeur = depth;
 		
-		//int osef = minMax(terrain, nbPlays, profondeur);
-
 		scoreChoix = minMax(terrain, nbPlays, profondeur);
 
 		scoreChoix = tools.changeCoup(terrain,largeur,scoreChoix);
