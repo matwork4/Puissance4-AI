@@ -24,7 +24,7 @@ public class GamePanel extends JPanel implements ActionListener{
 	int typepartie;
 	Random random;
 	Terrain terrain1;
-	//AI1 Tron1;
+	//AI1 Tron1; On ne l'utilise pas ici
 	AI1 Tron2;
 	AI2 Tron3;
 	Graphics g;

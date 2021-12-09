@@ -79,19 +79,6 @@ public class MenuPanel extends JPanel implements ActionListener {
         			this.add(buttonJvJ);
             	}
         	}
-        	
-        /* Ceci permettait de générer des boutons correspondant a la profondeur :
-    	}else {
-        	for(int i=0;i<nbDepthButtons;i++) {
-        		if(e.getSource()==depths[i]) {
-        			depthPartie = i+decalDepth;
-        			
-        			buttonJvJ.setText("Play");
-        			buttonJvJ.setEnabled(true);
-        			this.add(buttonJvJ);
-        			
-        		}
-        	}*/
         }
     }
     

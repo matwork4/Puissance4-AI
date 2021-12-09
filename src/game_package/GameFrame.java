@@ -12,7 +12,6 @@ public class GameFrame extends JFrame {
 
 		menu = new MenuPanel(this);
 		this.add(menu);
-		//this.add(new GamePanel());
 		this.setTitle("Puissance 4 by Mathis, Nicolas, Nozie - M1 IC - 2021");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(false);
@@ -24,11 +23,6 @@ public class GameFrame extends JFrame {
 
 	public void startGame(int typePartie, int depth, boolean isAlphabeta)
 	{
-		/* Deux options */
-
-		/*this.getContentPane().removeAll();
-		this.getContentPane().invalidate();*/
-
 		this.menu.setVisible(false);
 		this.getContentPane().add(new GamePanel(typePartie, depth, isAlphabeta));
 		this.getContentPane().revalidate();
